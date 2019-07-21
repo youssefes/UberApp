@@ -7,15 +7,29 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    
 
+    fileprivate var container = containerVc()
+    
+    var Meancontainer : containerVc{
+        return container
+    }
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        FirebaseApp.configure()
+        
+        window?.rootViewController = container
+        window?.makeKeyAndVisible()
+        
+        IQKeyboardManager.shared.enable = true
         return true
     }
 
@@ -41,6 +55,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    class func GetAppDelegate() -> AppDelegate {
+        return UIApplication.shared.delegate as! AppDelegate
+    }
 
 }
 
